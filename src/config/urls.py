@@ -15,14 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.schemas import get_schema_view
+from rest_framework.routers import SimpleRouter
 from posts import views
 
-urlpatterns = [
+router = SimpleRouter()
+router.register("api/v1/users", views.UserViewSet, basename="users")
+
+urlpatterns = router.urls
+urlpatterns += [
     path('admin/', admin.site.urls),
-    path('api/v1/users/', views.UserList.as_view()),
-    path('api/v1/users/<int:pk>/', views.UserDetail.as_view()),
     path('api/v1/posts/', include('posts.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/v1/dj-rest-auth/', include('dj_rest_auth.urls')),
-    path('api/v1/dj-rest-auth/registration/', include('dj_rest_auth.registration.urls'))
+    path('api/v1/dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('openapi', get_schema_view(
+        title="Blog API",
+        description="A sample API for learning DRF",
+        version="1.0.0"
+    ), name="openapi-schema")
 ]

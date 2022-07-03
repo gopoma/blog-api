@@ -16,4 +16,7 @@ python manage.py createsuperuser
 pip install djangorestframework
 pip install dj-rest-auth
 pip install django-allauth
+pip install pyyaml
+pip install uritemplate
+pip install drf-yasg
 ```
