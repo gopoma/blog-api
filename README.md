@@ -14,4 +14,6 @@ python manage.py startapp posts
 python manage.py migrate
 python manage.py createsuperuser
 pip install djangorestframework
+pip install dj-rest-auth
+pip install django-allauth
 ```
